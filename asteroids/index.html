@@ -8,22 +8,35 @@
   <!-- vendor -->
   <script type="text/javascript" src="vendor/jquery-1.11.0.js"></script>
   <script type="text/javascript" src="vendor/underscore.js"></script>
+  <script type="text/javascript" src="vendor/keymaster.js"></script>
 
   <!-- lib - css -->
   <link rel="stylesheet" href="lib/s.css" type="text/css" media="screen">
 
-  <!-- lib - javascript -->
-  <script type="text/javascript" src="lib/inherit.js"></script>
-  <script type="text/javascript" src="lib/keymaster.js"></script>
-  <script type="text/javascript" src="lib/movingObject.js"></script>
-  <script type="text/javascript" src="lib/asteroid.js"></script>
-  <script type="text/javascript" src="lib/bullet.js"></script>
-  <script type="text/javascript" src="lib/ship.js"></script>
+  <!-- lib - javascript: util -->
+  <script type="text/javascript" src="lib/util/inherit.js"></script>
+  <script type="text/javascript" src="lib/util/vector.js"></script>
+
+  <!-- lib - javascript: moving_object -->
+  <script type="text/javascript"
+          src="lib/moving_object/movingObject.js">
+  </script>
+
+  <script type="text/javascript" src="lib/moving_object/asteroid.js"></script>
+  <script type="text/javascript" src="lib/moving_object/bullet.js"></script>
+  <script type="text/javascript" src="lib/moving_object/ship.js"></script>
+
+  <!-- lib - javascript: game -->
   <script type="text/javascript" src="lib/game.js"></script>
 
   <!-- document ready -->
   <script type="text/javascript">
     $(document).ready(function(){
+
+      // TODO:
+      // => event listener for window resize that pauses all objects
+      // => click listener that shoots in the direction of the click
+
       var canv = document.getElementById("asteroidCanvas");
       new Asteroids.Game(canv.getContext("2d")).start(15);
     });
@@ -37,6 +50,7 @@
     Use JavaScript, you fool!
   </noscript>
 
+  <!-- TODO: dynamically ascertain width and height atributes (with .attr) -->
   <canvas id="asteroidCanvas" width="800" height="800"></canvas>
 
 </body>
