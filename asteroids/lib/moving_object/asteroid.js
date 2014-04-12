@@ -1,19 +1,19 @@
 (function(root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
+  var Asteroid = Asteroids.Asteroid = function(properties){
+		
+		properties.color = Asteroid.COLOR;
 
-  var Asteroid = Asteroids.Asteroid = function(pos, vel){
-
-    this.RADIUS = 5;
-    this.COLOR = "white";
-
-    Asteroids.MovingObject.call(this, pos, vel, ((Math.random() * 10) + 2), this.COLOR);
+    Asteroids.MovingObject.call(this, properties);
 
   };
+	
+	Asteroid.COLOR = "white";
 
   Asteroid.inherits(Asteroids.MovingObject)
 
-  Asteroid.randomAsteroid = function(){
+  Asteroid.randomAsteroid = function(){ // TODO: only along the perimiter
 
     var randomX = Math.random() * Asteroids.Game.DIM_X;
     var randomY = Math.random() * Asteroids.Game.DIM_Y;

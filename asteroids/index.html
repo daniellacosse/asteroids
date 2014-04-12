@@ -6,42 +6,43 @@
   <title>Asteroids</title>
 
   <!-- vendor -->
-  <script type="text/javascript" src="vendor/jquery-1.11.0.js"></script>
-  <script type="text/javascript" src="vendor/underscore.js"></script>
-  <script type="text/javascript" src="vendor/keymaster.js"></script>
+  <script src="vendor/jquery-1.11.0.js"></script>
+  <script src="vendor/underscore.js"></script>
+  <script src="vendor/keymaster.js"></script>
 
   <!-- lib - css -->
   <link rel="stylesheet" href="lib/s.css" type="text/css" media="screen">
 
   <!-- lib - javascript: util -->
-  <script type="text/javascript" src="lib/util/inherit.js"></script>
-  <script type="text/javascript" src="lib/util/vector.js"></script>
+  <script src="lib/util/inherit.js"></script>
+  <script src="lib/util/position.js"></script>
+  <script src="lib/util/vector.js"></script>
 
   <!-- lib - javascript: moving_object -->
-  <script type="text/javascript"
-          src="lib/moving_object/movingObject.js">
-  </script>
-
-  <script type="text/javascript" src="lib/moving_object/asteroid.js"></script>
-  <script type="text/javascript" src="lib/moving_object/bullet.js"></script>
-  <script type="text/javascript" src="lib/moving_object/ship.js"></script>
+  <script src="lib/moving_object/movingObject.js"></script>
+  <script src="lib/moving_object/asteroid.js"></script>
+  <script src="lib/moving_object/bullet.js"></script>
+  <script src="lib/moving_object/ship.js"></script>
 
   <!-- lib - javascript: game -->
-  <script type="text/javascript" src="lib/game.js"></script>
+  <script src="lib/game.js"></script>
 
   <!-- document ready -->
-  <script type="text/javascript">
-    $(document).ready(function(){
-
+  <script>
       // TODO:
       // => event listener for window resize that pauses all objects
-      // => click listener that shoots in the direction of the click
-
-      var canv = document.getElementById("asteroidCanvas");
-      new Asteroids.Game(canv.getContext("2d")).start(15);
+      // => click listener that shoots in the direction of the click    
+		$(function(){
+      var asteroidCanvas = document.getElementById("asteroidCanvas");
+      
+			new Asteroids.Game( 
+				
+				asteroidCanvas.getContext("2d") 
+				
+			).start(15); //sets number of asteroids (TODO: dynamic default)
+			
     });
   </script>
-
 </head>
 
 <body>
@@ -50,7 +51,7 @@
     Use JavaScript, you fool!
   </noscript>
 
-  <!-- TODO: dynamically ascertain width and height atributes (with .attr) -->
+  <!-- TODO: dynamically ascertain width and height atributes (with $().attr) -->
   <canvas id="asteroidCanvas" width="800" height="800"></canvas>
 
 </body>

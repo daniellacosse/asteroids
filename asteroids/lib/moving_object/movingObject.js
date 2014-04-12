@@ -1,12 +1,13 @@
 (function(root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var MovingObject = Asteroids.MovingObject = function(pos, vel, radius, color){
+  var MovingObject = Asteroids.MovingObject = function(properties){
 
-    this.pos = pos;
-    this.vel = vel;
-    this.radius = radius;
-    this.color = color;
+		this.pos = properties.pos;
+    this.vel = properties.vel;
+    this.radius = properties.radius;
+    this.color = properties.color;
+    this.game = properties.game;
 
   }
 

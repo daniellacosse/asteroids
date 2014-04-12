@@ -1,16 +1,16 @@
 (function(root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Ship = Asteroids.Ship = function() {
-    this.RADIUS = 8;
-    this.COLOR = 'red';
-    this.pos = [
-    Asteroids.Game.DIM_X / 2 - this.RADIUS,
-    Asteroids.Game.DIM_Y / 2 - this.RADIUS
-    ]
+  var Ship = Asteroids.Ship = function(properties) {
+    
+		properties.radius = Ship.RADIUS;
+		properties.color = Ship.COLOR;
 
-    Asteroids.MovingObject.call(this, this.pos, [0,0], this.RADIUS, this.COLOR);
+    Asteroids.MovingObject.call(this, properties);
   }
+	
+	Ship.RADIUS = 8;
+	Ship.COLOR = "red";
 
   Ship.inherits(Asteroids.MovingObject);
 

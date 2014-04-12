@@ -1,22 +1,18 @@
 (function(root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Bullet = Asteroids.Bullet = function(pos, vel, game){
+  var Bullet = Asteroids.Bullet = function(properties){
 
-    this.RADIUS = 2;
-    this.COLOR = "red";
-    this.game = game;
+		properties.radius = Bullet.RADIUS;
+		properties.color = Bullet.COLOR;
 
-    posDup = pos.slice();
-
-    var hypotenuse = Math.sqrt(Math.pow(vel[0], 2) + Math.pow(vel[1], 2));
-
-    var x = (vel[0] / hypotenuse) * Bullet.SPEED;
-    var y = (vel[1] / hypotenuse) * Bullet.SPEED;
-
-    Asteroids.MovingObject.call(this, posDup, [x, y], this.RADIUS, this.COLOR);
+    Asteroids.MovingObject.call(this, properties);
 
   };
+
+  Bullet.SPEED = 3;
+	Bullet.COLOR = "red";
+	Bullet.RADIUS = 2;
 
   Bullet.inherits(Asteroids.MovingObject);
 
@@ -40,6 +36,5 @@
 
   };
 
-  Bullet.SPEED = 3;
 
 })(this);
