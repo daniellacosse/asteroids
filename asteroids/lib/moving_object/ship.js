@@ -22,7 +22,11 @@
   Ship.prototype.fireBullet = function(game) {
     if (this.vel === [0, 0]) { return null };
 
-    return new Asteroids.Bullet(this.pos, this.vel, game);
+    return new Asteroids.Bullet({
+			pos: this.pos, 
+			vel: this.vel, 
+			game: game
+		});
   };
 
 })(this);
