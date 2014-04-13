@@ -24,26 +24,10 @@
   MovingObject.prototype.move = function(
 
 	{
-		if (this._wraps) 
-		
-		{
-			this.vel.hits(
-				pos.dimensions, function(vel_dim, pos_dim)
-				
-					{
-				
-				
-				
-					})
-		} 
-		
-		else 
-		
-		{
-			this.pos.x += this.vel.x
-			this.pos.y += this.vel.y
-			//increment position by velocity vector
+		if (this._wraps) {
 			
+		} else {
+			this.pos._plus_(vel.dimensions)
 		}
 		
 		
