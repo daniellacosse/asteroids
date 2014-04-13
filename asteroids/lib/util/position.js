@@ -1,7 +1,7 @@
 (function(root){
-  var _2d = root._2d = (root._2d || {});
+  var _2D = root._2D = (root._2D || {});
 
-	var Position = _2d.Position = function(x, y){
+	var Position = _2D.Position = function(x, y){
 		
 		this.x = x; this.y = y;
 		this.dimensions = [x, y];
@@ -20,7 +20,7 @@
 	}
 	
 	Position.prototype.lineTo = function(otherPos){
-		return new _2d.Vector(
+		return new _2D.Vector(
 			otherPos.x - this.x, 
 			otherPos.y - this.y
 		);

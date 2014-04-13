@@ -1,9 +1,9 @@
 (function(root){
-  var _2d = root._2d = (root._2d || {});
+  var _2D = root._2D = (root._2D || {});
 	
 	//worry about impulse a bit later
 	
-	var Impulse = _2d.Impulse = function(x, y, t){
+	var Impulse = _2D.Impulse = function(x, y, t){
 			
 	}
 

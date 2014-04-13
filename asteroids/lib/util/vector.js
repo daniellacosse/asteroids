@@ -1,9 +1,9 @@
 (function(root){
-  var _2d = root._2d = (root._2d || {});
+  var _2D = root._2D = (root._2D || {});
 	
-	var Vector = _2d.Vector = function(x, y)
+	var Vector = _2D.Vector = function(x, y)
 	{
-		_2d.Position.call(this, x, y);
+		_2D.Position.call(this, x, y);
 		
 		this.magnitude = Math.sqrt(
 			
@@ -12,7 +12,7 @@
 		);
 	}
 	
-	Vector.inherits(_2d.Position);
+	Vector.inherits(_2D.Position);
 	
 	Vector.prototype.isEqualto = function(otherVec)
 	{
@@ -51,7 +51,7 @@
 	{
 		return [
 			pos, 
-			new _2d.Position(pos.x + this.x, pos.y + this.y)
+			new _2D.Position(pos.x + this.x, pos.y + this.y)
 		];
 	}
 
@@ -63,7 +63,7 @@
 		return new Vector(_x, _y);
 	}
 
-	//for universal appeal, use "_2d.Position.dimensions" to pass in
+	//for universal appeal, use "_2D.Position.dimensions" to pass in
 	//the value pair instead of the full object:
 	
 	Vector.prototype.hit = function(valPair, callback)
