@@ -1,7 +1,9 @@
 (function(root){
-  var 2d = root.2d = (root.2d || {});
+  var _2d = root._2d = (root._2d || {});
 	
-	var Impulse = 2d.Impulse = function(x, y){
+	//worry about impulse a bit later
+	
+	var Impulse = _2d.Impulse = function(x, y, t){
 			
 	}
 
