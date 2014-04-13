@@ -1,17 +1,53 @@
 (function(root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var MovingObject = Asteroids.MovingObject = function(properties){
-
-		this.pos = properties.pos;
-    this.vel = properties.vel;
-    this.radius = properties.radius;
-    this.color = properties.color;
-    this.game = properties.game;
-
+  var MovingObject = Asteroids.MovingObject = function (properties)
+	
+	{
+		this.pos = properties.pos
+    this.vel = properties.vel
+    this.radius = properties.radius
+    this.color = properties.color
+    this.game = properties.game
+		this._wraps = false;
   }
+	
+	MovingObject.prototype.wrapOn = function (maxX, maxY)
+	
+	{ 
+		this.maxX = maxX; this.maxY = maxY
+		this.pos.scaleTo(maxX, maxY)
+		this.vel.scaleTo(maxX, maxY)
+		this._wraps = true;
+	}
 
-  MovingObject.prototype.move = function(){
+  MovingObject.prototype.move = function(
+
+	{
+		if (this._wraps) 
+		
+		{
+			this.vel.hits(
+				pos.dimensions, function(vel_dim, pos_dim)
+				
+					{
+				
+				
+				
+					})
+		} 
+		
+		else 
+		
+		{
+			this.pos.x += this.vel.x
+			this.pos.y += this.vel.y
+			//increment position by velocity vector
+			
+		}
+		
+		
+		
 		//use vel.operation & this.pos.coords
     if (this.vel.x + this.pos.x < 0){
       this.pos.x = this.vel.x + this.pos.x + Asteroids.Game.DIM_X;
