@@ -9,16 +9,17 @@
     this.radius = properties.radius
     this.color = properties.color
     this.game = properties.game
-		this._wraps = false;
+		this._wraps = properties._wraps
   }
 	
 	MovingObject.prototype.wrapOn = function (maxX, maxY)
 	
 	{ 
+		this._wraps = true //necessary?
+
 		this.maxX = maxX; this.maxY = maxY
 		this.pos.scaleTo(maxX, maxY)
 		this.vel.scaleTo(maxX, maxY)
-		this._wraps = true;
 	}
 
   MovingObject.prototype.move = function(

@@ -6,33 +6,77 @@
 		{
 			this.x = x; this.y = y
 			this.dimensions = [x, y]
+			this._scales = false;
 		}
-	
-	Position.prototype.isEqualto = function (otherPos)
+
+	Position.prototype.isEqualto = function (other)
 	
 		{
-			return ((this.x === otherPos.x) && (this.y === otherPos.y))
-		}
-	
-	Position.prototype.plus = function (otherPos)
+			return ((this.x === other.x) && (this.y === other.y))
+		}	
+
+	Position.prototype.mod = function (callback)
 	
 		{
-			return new Position(
-				this.x + otherPos.x, 
-				this.y + otherPos.y
+			var _x = callback(this.x)
+			var _y = callback(this.y)
+
+			return new this.constructor(_x, _y)
+		}
+	
+	Position.prototype.hits = function (other, callback)
+	
+		{
+			var _x = callback(this.x, other.x)
+			var _y = callback(this.y, other.y)
+
+			return new this.constructor(_x, _y)
+		}
+	
+	Position.prototype._mod_ = function (callback)
+	
+		{
+			this.x = callback(this.x)
+			this.y = callback(this.y)
+			this.dimensions = [this.x, this.y]
+			if (this._scales) this._refresh_("scale")
+			
+			return null
+		}
+	
+	Position.prototype._hits_ = function (other, callback)
+	
+		{
+			this.x = callback(this.x, other.x)
+			this.y = callback(this.y, other.y)
+			this.dimensions = [this.x, this.y]
+			if (this._scales) this._refresh_("scale")
+			
+			return null
+		}	
+
+	Position.prototype.plus = function (other)
+	
+		{
+			return this.hits(
+				other,
+				function (a, b) { return a + b }
 		)}
 	
 	Position.prototype._plus_ = function (other)
 	
 		{
-			this.x += other.x 
-			this.y += other.y
-			this.dimensions = [x, y]
+			this._hits_(
+				other,
+				function (a, b) { return a + b }
+			)
+			
+			return null
 		}
 	
 	Position.prototype.lineTo = function (otherPos)
 	
-		{
+		{ // can't use hits because we have to return a vector
 			return new _2D.Vector(
 				otherPos.x - this.x, 
 				otherPos.y - this.y
@@ -41,10 +85,11 @@
 	Position.prototype.scalesTo = function (maxX, maxY)
 	
 		{	
-			if (X > maxX || Y > maxY) throw "Out of Bounds"
+			if (this.x > maxX || this.y > maxY) throw "Out of Bounds"
 		
-			this.maxX = maxX
-			this.maxY = maxY
+			this._scales = true
+			
+			this.maxX = maxX; this.maxY = maxY
 			this.pcntX = this.x / maxX
 			this.pcntY = this.y / maxY
 			this.pcntDim = [ this.pcntX, this.pcntY ]
@@ -74,38 +119,6 @@
 			}
 		
 			return null
-		}
-	
-	Position.prototype.mod = function (callback)
-	
-		{
-			var _x = callback(this.x)
-			var _y = callback(this.y)
-
-			return new this.constructor(_x, _y)
-		}
-	
-	Position.prototype.hits = function (valPair, callback)
-	
-		{
-			var _x = callback(this.x, valPair[0])
-			var _y = callback(this.y, valPair[1])
-
-			return new this.constructor(_x, _y)
-		}
-	
-	Position.prototype._mod_ = function (callback)
-	
-		{
-			this.x = callback(this.x)
-			this.y = callback(this.y)
-		}
-	
-	Position.prototype._hits_ = function (valPair, callback)
-	
-		{
-			this.x = callback(this.x, valPair[0])
-			this.y = callback(this.y, valPair[1])
 		}
 	
 })(this);

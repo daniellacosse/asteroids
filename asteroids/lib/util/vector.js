@@ -11,31 +11,14 @@
 		)}
 	
 	Vector.inherits(_2D.Position)
-	
-	Vector.prototype.isEqualto = function (otherVec)
-	
-		{
-			return ((this.x === otherVec.x) && (this.y === otherVec.y))
-		}
-
-	Vector.prototype.plus = function (otherVec)
-	
-		{
-			return new Vector(
-				this.x + otherVec.x, 
-				this.y + otherVec.y
-		)}
-		
-	//_plus_ inherited by position object
 
 	Vector.prototype.normalize = function()
 	
 		{
 			var mag = this.magnitude;
 		
-			return new Vector(
-				this.x / mag, 
-				this.y / mag
+			return this.mod(
+				function (dim) { return dim / mag }
 		)}
 	
 	Vector.prototype._normalize_ = function()
@@ -55,12 +38,11 @@
 		{
 			var factor = newMag / this.magnitude
 		
-			return new Vector(
-				this.x * factor, 
-				this.y * factor
+			return this.mod(
+				function (dim) { return dim * factor }
 		)}
 		
-	Vector.prototype.setMagnitude = function (newMag)
+	Vector.prototype._magnitude_ = function (newMag)
 
 		{
 			var factor = newMag / this.magnitude
@@ -71,7 +53,7 @@
 	
 	Vector.prototype.endpointsAt = function (pos)
 	
-		{
+		{ //analogue to Position's "lineTo"
 			return [
 				pos, 
 				new _2D.Position(
