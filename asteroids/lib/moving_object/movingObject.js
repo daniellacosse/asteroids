@@ -79,19 +79,12 @@
 				}
 		)}
 		
-		MovingObject.prototype.rebound = function (other)
-	
-			{
-				var thisMass = this.radius, thatMass = other.radius;
+	MovingObject.prototype.rebound = function (other)
+
+		{
+			
+			return this.clone()._rebound_(other)
 		
-				return this.vel.hits( other.vel, function (thisVel, thatVel) 
-				
-					{
-						var numerator = thisVel * (thisMass - thatMass) + ( 2 * thatMass * thatVel )
-						var denominator = thisMass + thatMass
-				
-						return numerator / denominator
-					}
-			)}
+		}
 
 })(this);

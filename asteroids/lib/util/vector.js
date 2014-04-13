@@ -10,17 +10,14 @@
 				Math.pow(x, 2) + Math.pow(y, 2)
 		)}
 	
+	Position.immobile = function () 
+
+		{
+			return new Vector(0, 0)
+		}
+
 	Vector.inherits(_2D.Position)
 
-	Vector.prototype.normalize = function()
-	
-		{
-			var mag = this.magnitude;
-		
-			return this.mod(
-				function (dim) { return dim / mag }
-		)}
-	
 	Vector.prototype._normalize_ = function()
 	
 		{
@@ -29,19 +26,16 @@
 			this._mod_(
 				function (dim) { return dim / mag }
 			)
-			
-			this.dimensions = [x, y]
+
+			return null;
 		}
-	
-	Vector.prototype.ofMagnitude = function (newMag)
-	
-		{ // clearly "magnitude" is taken
-			var factor = newMag / this.magnitude
 		
-			return this.mod(
-				function (dim) { return dim * factor }
-		)}
-		
+	Vector.prototype.normalize = function()
+	
+		{
+			return this.clone()._normalize_()
+		}
+
 	Vector.prototype._magnitude_ = function (newMag)
 
 		{
@@ -51,6 +45,12 @@
 				function (dim) { return dim * factor }
 		)}
 	
+	Vector.prototype.ofMagnitude = function (newMag)
+	
+		{ // clearly "magnitude" is taken		
+			return this.clone()._magnitude_(newMag)
+		}
+		
 	Vector.prototype.endpointsAt = function (pos)
 	
 		{ // analogue to Position's "lineTo"

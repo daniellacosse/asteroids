@@ -8,24 +8,19 @@
 			this.dimensions = [x, y]
 			this._scales = false;
 		}
+		
+	Position.origin = function () 
+	
+		{
+			return new Position(0, 0)
+		}
 
 	Position.prototype.isEqualto = function (other)
 	
 		{
 			return ((this.x === other.x) && (this.y === other.y))
 		}	
-  
-	// TODO: DRY <method>s further by calling _<method>_ on duped object
 	                                             
-	Position.prototype.mod = function (callback) 
-	
-		{
-			var _x = callback(this.x)
-			var _y = callback(this.y)
-
-			return new this.constructor(_x, _y)
-		}
-	
 	Position.prototype._mod_ = function (callback)
 	
 		{
@@ -36,16 +31,12 @@
 			
 			return null
 		}
-
-	Position.prototype.hits = function (other, callback)
+			
+	Position.prototype.mod = function (callback) 
 	
 		{
-			var _x = callback(this.x, other.x)
-			var _y = callback(this.y, other.y)
-
-			return new this.constructor(_x, _y)
+			return this.clone()._mod_(callback);
 		}
-	
 	
 	Position.prototype._hits_ = function (other, callback)
 	
@@ -56,16 +47,14 @@
 			if (this._scales) this._refresh_("scale")
 			
 			return null
-		}	
-
-	Position.prototype.plus = function (other)
+		}
+		
+	Position.prototype.hits = function (other, callback)
 	
 		{
-			return this.hits(
-				other,
-				function (a, b) { return a + b }
-		)}
-	
+			return this.clone()._hits_(other, callback);
+		}
+
 	Position.prototype._plus_ = function (other)
 	
 		{
@@ -75,6 +64,12 @@
 			)
 			
 			return null
+		}
+		
+	Position.prototype.plus = function (other)
+	
+		{
+			return this.clone()._plus_(other);
 		}
 	
 	Position.prototype.lineTo = function (otherPos)

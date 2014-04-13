@@ -1,32 +1,42 @@
 (function(root){
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Ship = Asteroids.Ship = function(properties) {
-    
-		properties.radius = Ship.RADIUS;
-		properties.color = Ship.COLOR;
-
-    Asteroids.MovingObject.call(this, properties);
-  }
+  var Ship = Asteroids.Ship = function (properties) 
 	
-	Ship.RADIUS = 8;
-	Ship.COLOR = "red";
+		{
+			properties.radius = Ship.RADIUS
+			properties.color = Ship.COLOR
 
-  Ship.inherits(Asteroids.MovingObject);
+	    Asteroids.MovingObject.call(this, properties)
+	  }
+	
+	Ship.RADIUS = 8
+	Ship.COLOR = "red"
 
-  Ship.prototype.power = function(impulse) {
-    this.vel[0] += impulse[0];
-    this.vel[1] += impulse[1];
-  };
+  Ship.inherits(Asteroids.MovingObject)
 
-  Ship.prototype.fireBullet = function(game) {
-    if (this.vel === [0, 0]) { return null };
+  Ship.prototype.thrust = function (impulse) // gotta make this an impulse object
+	
+		{
+	    this.vel._plus_(impulse)
+		
+			return null
+	  }
 
-    return new Asteroids.Bullet({
-			pos: this.pos, 
-			vel: this.vel, 
-			game: game
-		});
-  };
+  Ship.prototype.fire = function(mousePos, bulletSpeed) 
+	
+		{
+			var bulletVector;
+
+	    if (this.vel.magnitude === 0) return
+			
+			bulletVector = this.pos.lineTo(mousePos)._magnitude_(bulletSpeed)
+			
+	    return new Asteroids.Bullet({
+				pos: this.pos, 
+				vel: bulletVector, 
+				game: this.game
+			})
+	  }
 
 })(this);
