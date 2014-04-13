@@ -35,7 +35,7 @@
 	
 	Vector.prototype.ofMagnitude = function (newMag)
 	
-		{
+		{ // clearly "magnitude" is taken
 			var factor = newMag / this.magnitude
 		
 			return this.mod(
@@ -53,7 +53,7 @@
 	
 	Vector.prototype.endpointsAt = function (pos)
 	
-		{ //analogue to Position's "lineTo"
+		{ // analogue to Position's "lineTo"
 			return [
 				pos, 
 				new _2D.Position(

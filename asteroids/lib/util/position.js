@@ -14,21 +14,14 @@
 		{
 			return ((this.x === other.x) && (this.y === other.y))
 		}	
-
-	Position.prototype.mod = function (callback)
+  
+	// TODO: DRY <method>s further by calling _<method>_ on duped object
+	                                             
+	Position.prototype.mod = function (callback) 
 	
 		{
 			var _x = callback(this.x)
 			var _y = callback(this.y)
-
-			return new this.constructor(_x, _y)
-		}
-	
-	Position.prototype.hits = function (other, callback)
-	
-		{
-			var _x = callback(this.x, other.x)
-			var _y = callback(this.y, other.y)
 
 			return new this.constructor(_x, _y)
 		}
@@ -43,6 +36,16 @@
 			
 			return null
 		}
+
+	Position.prototype.hits = function (other, callback)
+	
+		{
+			var _x = callback(this.x, other.x)
+			var _y = callback(this.y, other.y)
+
+			return new this.constructor(_x, _y)
+		}
+	
 	
 	Position.prototype._hits_ = function (other, callback)
 	
@@ -81,7 +84,17 @@
 				otherPos.x - this.x, 
 				otherPos.y - this.y
 		)}
+		
+	Position.prototype.distanceTo = function (otherPos)
+
+		{ // used to overcome an inefficiency whereby 
+			// we avoid creating vector objects to 
+			// merely check collisions
+			return Math.sqrt(
+				Math.pow(this.x, 2) + Math.pow(this.y, 2)
+		)}
 	
+	// still not 100% on "scale logic"
 	Position.prototype.scalesTo = function (maxX, maxY)
 	
 		{	
