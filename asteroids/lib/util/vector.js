@@ -55,6 +55,8 @@
 				function (dim) { return dim * factor }
 		  )
 
+      this.magnitude = newMag
+
       return null
     }
 
@@ -62,7 +64,7 @@
 
 		{ // clearly "magnitude" is taken
 			var cloneVar = this.clone()
-      cloneVar._magnitude_(callback)
+      cloneVar._magnitude_(newMag)
       return cloneVar
 		}
 

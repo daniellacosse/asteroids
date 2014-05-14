@@ -33,7 +33,7 @@
   <!-- document ready -->
   <script>
 		$(function(){
-
+      
       startTimer(1500, 250)
 
       var asteroidCanvas = document.getElementById("asteroidCanvas")
@@ -48,12 +48,14 @@
         width: $asteroidCanvas.attr("width"),
         height: $asteroidCanvas.attr("height")
 
-			}).start()
+			})
+
+      window.game.start()
 
       $asteroidCanvas.click(function(event){
-        console.log(event)
-        // TODO:
-        // shoots in the direction of the click
+        var mousePos = new _2D.Position(event.pageX, event.pageY)
+
+        game.fireBullet(mousePos)
       })
 
       $(window).resize(function(){

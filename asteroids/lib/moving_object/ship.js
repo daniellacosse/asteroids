@@ -23,11 +23,13 @@
 			return null
 	  }
 
-  Ship.prototype.fire = function(mousePos, bulletSpeed)
+  Ship.prototype.fire = function(mousePos)
 
 		{
-      var bulletVector = this.pos.lineTo(mousePos).ofMagnitude(bulletSpeed)
+      debugger
+      var bulletVector = this.pos.lineTo(mousePos)
 
+      bulletVector._magnitude_(Asteroids.Bullet.SPEED)
       bulletVector._plus_(this.vel)
 
 	    return new Asteroids.Bullet({

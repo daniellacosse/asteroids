@@ -94,11 +94,11 @@
 	//     clearInterval(this.stepInterval)
 	//   }
 
-  // Game.prototype.fireBullet = function()
-  //
-	// 	{
-	//     this.bullets.push(this.ship.fire(this))
-	//   }
+  Game.prototype.fireBullet = function(mousePos)
+
+		{
+	    this.bullets.push(this.ship.fire(mousePos))
+	  }
 
   Game.prototype.bindKeyHandlers = function()
 
