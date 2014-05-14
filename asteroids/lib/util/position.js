@@ -15,6 +15,33 @@
 			return new Position(0, 0)
 		}
 
+  Position.random = function(width, height)
+
+    {
+      return new Position(width * Math.random(), height * Math.random())
+    }
+
+  Position.randomPerim = function(width, height)
+
+    {
+      var wall = Math.round(Math.random() * 3)
+
+      switch(wall) {
+      case 0:
+        return new Position(width * Math.random(), 0)
+        break
+      case 1:
+        return new Position(width * Math.random(), height)
+        break
+      case 2:
+        return new Position(0, height * Math.random())
+        break
+      case 3:
+        return new Position(width, height * Math.random())
+        break
+      }
+    }
+
 	Position.prototype.isEqualto = function (other)
 
 		{
@@ -134,5 +161,6 @@
 
 			return null
 		}
+
 
 })(this);

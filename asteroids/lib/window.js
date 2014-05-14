@@ -13,5 +13,24 @@ window.getViewportHeight = function()
 window.getViewportDimensions = function()
 
   {
-    return [getViewportWidth, get ViewportHeight]
+    return [getViewportWidth(), getViewportHeight()]
+  }
+
+window.startTimer = function(time, rate)
+
+  {
+    var ticks = 0
+    var tick = function(time, rate)
+
+      {
+        setTimeout( function(){
+          ticks++
+          $("title").html(ticks)
+          tick(time + rate, rate)
+        }, time)
+      }
+
+    tick(time, rate)
+
+    return null
   }

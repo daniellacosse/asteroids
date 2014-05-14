@@ -16,6 +16,14 @@
 			return new Vector(0, 0)
 		}
 
+  Vector.random = function (minMag, maxMag)
+
+    {
+      var randomMag = (maxMag - minMag) * Math.random() + minMag
+
+      return new Vector(1, 1).ofMagnitude(randomMag)
+    }
+
 	Vector.inherits(_2D.Position)
 
 	Vector.prototype._normalize_ = function()

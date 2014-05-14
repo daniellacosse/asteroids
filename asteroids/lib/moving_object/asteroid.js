@@ -4,40 +4,35 @@
   var Asteroid = Asteroids.Asteroid = function(properties)
 
   	{
-  		properties.color = Asteroid.COLOR
-  		properties.radius = Asteroid.RADIUS
-
       Asteroids.MovingObject.call(this, properties)
     }
 
   Asteroid.inherits(Asteroids.MovingObject)
 
-  ///\\\///\\\ default color and radius ///\\\///\\\
-	Asteroid.COLOR = "white"
-	Asteroid.RADIUS = 5
 
-  Asteroid.randomAsteroid = function()
+  ///\\\///\\\ pixels or percent? ///\\\///\\\
+  Asteroid.MIN_SPEED = 5
+  Asteroid.MAX_SPEED = 50
+  Asteroid.MIN_RADIUS = 5
+  Asteroid.MAX_RADIUS = 50
 
-		{ 																										// TODO: only along the perimiter
-	    var randomX = Math.random() * Asteroids.Game.DIM_X; // should have a 'random' factory method for
-	    var randomY = Math.random() * Asteroids.Game.DIM_Y; // _2D::Position
+  Asteroid.randomAsteroid = function(game)
 
-	    var randomVec = function(){
-	      var randomX = (
-	        (((Math.random() * 4) + 1) / 100) * Asteroids.Game.DIM_X
-	      ) / (1000/Asteroids.Game.FPS);
-
-	      var randomY = (
-	        (((Math.random() * 4) + 1) / 100) * Asteroids.Game.DIM_Y
-	      ) / (1000/Asteroids.Game.FPS);
-
-	      randomX *= Math.random() < 0.5 ? -1 : 1;
-	      randomY *= Math.random() < 0.5 ? -1 : 1;
-
-	      return [randomX, randomY];
-	    }
-
-	    return new Asteroid([randomX, randomY], randomVec());
+		{
+      return new Asteroid({
+        game: game,
+        _wraps: true,
+        pos: _2D.Position.randomPerim(game.width, game.height),
+        vel: _2D.Vector.random(Asteroid.MIN_SPEED, Asteroid.MAX_SPEED),
+        color: "white",
+        radius: Asteroid.randomRadius()
+      })
 	  }
+
+  Asteroid.randomRadius = function()
+
+    {
+      return (Asteroid.MAX_RADIUS - Asteroid.MIN_RADIUS) * Math.random() + Asteroid.MIN_RADIUS
+    }
 
 })(this);

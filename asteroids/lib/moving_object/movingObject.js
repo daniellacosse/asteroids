@@ -6,8 +6,10 @@
 		{
 			this.pos = properties.pos
 	    this.vel = properties.vel
+
 	    this.radius = properties.radius
 	    this.color = properties.color
+
 	    this.game = properties.game
 			this._wraps = properties._wraps
 	  }
@@ -43,14 +45,9 @@
 
 		{
 			if (this._wraps) {
-				return null
-				// wrap if necessary:
-
-				// this.pos._hits_( vel, function(pos, dPos) {
-				//
-				//
-				//
-				// })
+        this.pos._hits_( vel, function(pos, dPos) {
+          return (pos + dPos) //% maxX || maxY
+        })
 			} else {
 				this.pos._plus_(this.vel)
 			}

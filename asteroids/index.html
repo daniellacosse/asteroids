@@ -3,12 +3,13 @@
 
   <!-- meta -->
   <meta http-equiv="Content-type">
-  <title>Asteroids</title>
+  <title>0</title>
 
   <!-- vendor -->
   <script src="vendor/jquery-1.11.0.js"></script>
   <script src="vendor/underscore.js"></script>
   <script src="vendor/keymaster.js"></script>
+  <script src="vendor/deepCopy.js"></script>
 
   <!-- lib - css -->
   <link rel="stylesheet" href="lib/s.css" type="text/css" media="screen">
@@ -17,6 +18,7 @@
   <script src="lib/util/inherit.js"></script>
   <script src="lib/util/position.js"></script>
   <script src="lib/util/vector.js"></script>
+  <script src="lib/util/impulse.js"></script>
 
   <!-- lib - javascript: moving_object -->
   <script src="lib/moving_object/movingObject.js"></script>
@@ -25,33 +27,39 @@
   <script src="lib/moving_object/ship.js"></script>
 
   <!-- lib - javascript: game -->
+  <script src="lib/window.js"></script>
   <script src="lib/game.js"></script>
 
   <!-- document ready -->
   <script>
-      // TODO:
-      // => click listener that shoots in the direction of the click
 		$(function(){
+
+      startTimer(1500, 250)
 
       var asteroidCanvas = document.getElementById("asteroidCanvas")
       var $asteroidCanvas = $(asteroidCanvas)
-      var viewportWidth = getViewportWidth()
-      var viewportHeight = getViewportHeight()
 
-      $asteroidCanvas.attr("width", viewportWidth)
-      $asteroidCanvas.attr("height", viewportHeight)
+      $asteroidCanvas.attr("width", getViewportWidth())
+      $asteroidCanvas.attr("height", getViewportHeight())
 
-			window.game = new Asteroids.Game(
+			window.game = new Asteroids.Game({
 
-				asteroidCanvas.getContext("2d")
+				ctx: asteroidCanvas.getContext("2d"),
+        width: $asteroidCanvas.attr("width"),
+        height: $asteroidCanvas.attr("height")
 
-			)//.start(15); //sets number of asteroids (TODO: dynamic default)
+			}).start()
 
-      $(window).resize(function(){
-        console.log("width:", getViewportWidth())
-        console.log("height:", getViewportHeight())
+      $asteroidCanvas.click(function(event){
+        console.log(event)
+        // TODO:
+        // shoots in the direction of the click
       })
 
+      $(window).resize(function(){
+        $asteroidCanvas.attr("width", getViewportWidth())
+        $asteroidCanvas.attr("height", getViewportHeight())
+      })
     });
 
   </script>
