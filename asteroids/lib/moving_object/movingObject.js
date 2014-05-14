@@ -52,7 +52,7 @@
 				//
 				// })
 			} else {
-				this.pos._plus_(vel)
+				this.pos._plus_(this.vel)
 			}
 	  }
 
@@ -72,12 +72,14 @@
 			this.vel._hits_( other.vel, function (thisVel, thatVel)
 
 				{
-					var numerator = thisVel * (thisMass - thatMass) + ( 2 * thatMass * thatVel )
+					var numerator = (thisVel * (thisMass - thatMass)) + ( 2 * thatMass * thatVel )
 					var denominator = thisMass + thatMass
 
 					return numerator / denominator
-				}
-		)}
+  		})
+
+      return null
+    }
 
 	MovingObject.prototype.rebound = function (other)
 
@@ -86,5 +88,15 @@
       cloneVar._rebound_(other)
       return cloneVar
 		}
+
+  MovingObject.elasticCollision = function(obj1, obj2)
+
+    {
+      var obj1Copy = obj1.clone()
+      obj1._rebound_(obj2)
+      obj2._rebound_(obj1Copy)
+
+      return null
+    }
 
 })(this);

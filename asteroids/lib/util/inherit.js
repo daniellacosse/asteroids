@@ -11,5 +11,5 @@ Function.prototype.inherits = function (SuperClass)
 Object.prototype.clone = function ()
 
 	{
-		return $.extend(true, {}, this)
+		return owl.deepCopy(this)
 	}

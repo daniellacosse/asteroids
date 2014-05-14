@@ -30,28 +30,39 @@
   <!-- document ready -->
   <script>
       // TODO:
-      // => event listener for window resize that pauses all objects
-      // => click listener that shoots in the direction of the click    
+      // => click listener that shoots in the direction of the click
 		$(function(){
-      var asteroidCanvas = document.getElementById("asteroidCanvas");
-      
-			new Asteroids.Game( 
-				
-				asteroidCanvas.getContext("2d") 
-				
-			).start(15); //sets number of asteroids (TODO: dynamic default)
-			
+
+      var asteroidCanvas = document.getElementById("asteroidCanvas")
+      var $asteroidCanvas = $(asteroidCanvas)
+      var viewportWidth = getViewportWidth()
+      var viewportHeight = getViewportHeight()
+
+      $asteroidCanvas.attr("width", viewportWidth)
+      $asteroidCanvas.attr("height", viewportHeight)
+
+			window.game = new Asteroids.Game(
+
+				asteroidCanvas.getContext("2d")
+
+			)//.start(15); //sets number of asteroids (TODO: dynamic default)
+
+      $(window).resize(function(){
+        console.log("width:", getViewportWidth())
+        console.log("height:", getViewportHeight())
+      })
+
     });
+
   </script>
 </head>
 
 <body>
 
-  <noscript>
+  <noscript class="modal">
     Use JavaScript, you fool!
   </noscript>
 
-  <!-- TODO: dynamically ascertain width and height atributes (with $().attr) -->
-  <canvas id="asteroidCanvas" width="800" height="800"></canvas>
+  <canvas id="asteroidCanvas"></canvas>
 
 </body>

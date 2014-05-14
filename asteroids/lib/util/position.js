@@ -55,7 +55,7 @@
 
 		{
 			var cloneVar = this.clone()
-      cloneVar._hits_(callback)
+      cloneVar._hits_(other, callback)
       return cloneVar
 		}
 

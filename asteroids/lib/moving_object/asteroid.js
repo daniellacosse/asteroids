@@ -2,21 +2,22 @@
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
   var Asteroid = Asteroids.Asteroid = function(properties)
-	
-	{
-		properties.color = Asteroid.COLOR
-		properties.radius = Asteroid.RADIUS
 
-    Asteroids.MovingObject.call(this, properties)
-  }
-	
+  	{
+  		properties.color = Asteroid.COLOR
+  		properties.radius = Asteroid.RADIUS
+
+      Asteroids.MovingObject.call(this, properties)
+    }
+
   Asteroid.inherits(Asteroids.MovingObject)
 
+  ///\\\///\\\ default color and radius ///\\\///\\\
 	Asteroid.COLOR = "white"
 	Asteroid.RADIUS = 5
 
   Asteroid.randomAsteroid = function()
-	
+
 		{ 																										// TODO: only along the perimiter
 	    var randomX = Math.random() * Asteroids.Game.DIM_X; // should have a 'random' factory method for
 	    var randomY = Math.random() * Asteroids.Game.DIM_Y; // _2D::Position
