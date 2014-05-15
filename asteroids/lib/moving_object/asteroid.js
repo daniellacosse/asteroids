@@ -9,12 +9,10 @@
 
   Asteroid.inherits(Asteroids.MovingObject)
 
-
-  ///\\\///\\\ pixels or percent? ///\\\///\\\
-  Asteroid.MIN_SPEED = 5
-  Asteroid.MAX_SPEED = 50
-  Asteroid.MIN_RADIUS = 5
-  Asteroid.MAX_RADIUS = 50
+  Asteroid.MIN_SPEED = 0.2
+  Asteroid.MAX_SPEED = 0.5
+  Asteroid.MIN_RADIUS = 0.1
+  Asteroid.MAX_RADIUS = 2
 
   Asteroid.randomAsteroid = function(game)
 
@@ -22,7 +20,7 @@
       return new Asteroid({
         game: game,
         _wraps: true,
-        pos: _2D.Position.randomPerim(game.width, game.height),
+        pos: _2D.Position.randomPerim(),
         vel: _2D.Vector.random(Asteroid.MIN_SPEED, Asteroid.MAX_SPEED),
         color: "white",
         radius: Asteroid.randomRadius()

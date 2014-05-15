@@ -33,8 +33,8 @@
   <!-- document ready -->
   <script>
 		$(function(){
-      
-      startTimer(1500, 250)
+
+      startTimer(1000, 1.025)
 
       var asteroidCanvas = document.getElementById("asteroidCanvas")
       var $asteroidCanvas = $(asteroidCanvas)
@@ -53,7 +53,10 @@
       window.game.start()
 
       $asteroidCanvas.click(function(event){
-        var mousePos = new _2D.Position(event.pageX, event.pageY)
+        var mousePosX = event.pageX / $asteroidCanvas.attr("width") * 100
+        var mousePosY = event.pageY / $asteroidCanvas.attr("height") * 100
+
+        var mousePos = new _2D.Position(mousePosX, mousePosY)
 
         game.fireBullet(mousePos)
       })
@@ -61,6 +64,8 @@
       $(window).resize(function(){
         $asteroidCanvas.attr("width", getViewportWidth())
         $asteroidCanvas.attr("height", getViewportHeight())
+        game.width = $asteroidCanvas.attr("width")
+        game.height = $asteroidCanvas.attr("height")
       })
     });
 

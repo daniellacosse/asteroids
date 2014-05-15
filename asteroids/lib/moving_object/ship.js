@@ -10,7 +10,7 @@
 	    Asteroids.MovingObject.call(this, properties)
 	  }
 
-	Ship.RADIUS = 8
+	Ship.RADIUS = 0.9
 	Ship.COLOR = "red"
 
   Ship.inherits(Asteroids.MovingObject)

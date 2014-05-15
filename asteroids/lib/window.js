@@ -26,7 +26,7 @@ window.startTimer = function(time, rate)
         setTimeout( function(){
           ticks++
           $("title").html(ticks)
-          tick(time + rate, rate)
+          tick(time * rate, rate)
         }, time)
       }
 

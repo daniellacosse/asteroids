@@ -11,19 +11,21 @@
 	    this.color = properties.color
 
 	    this.game = properties.game
-			this._wraps = properties._wraps
+			// this._wraps = properties._wraps
 	  }
 
   MovingObject.prototype.draw = function (ctx)
 
 		{
 	    ctx.fillStyle = this.color;
-	    ctx.beginPath();
+      var wid = parseInt(this.game.width)
+      var hgt = parseInt(this.game.height)
 
+	    ctx.beginPath();
 	    ctx.arc(
-	      this.pos.x,
-	      this.pos.y,
-	      this.radius,
+	      (this.pos.x / 100) * wid,
+	      (this.pos.y / 100) * hgt,
+	      (this.radius / 100) * (wid + hgt) / 2,
 	      0,
 	      2 * Math.PI
 	    );
@@ -31,26 +33,26 @@
 	    ctx.fill();
 	  }
 
-	MovingObject.prototype.wrapOn = function (maxX, maxY)
-
-		{
-			this._wraps = true // ??? -- still not 100% on this scale logic
-
-			this.maxX = maxX; this.maxY = maxY
-			this.pos.scaleTo(maxX, maxY)
-			this.vel.scaleTo(maxX, maxY)
-		}
+	// MovingObject.prototype.wrapOn = function (maxX, maxY)
+  //
+	// 	{
+	// 		this._wraps = true // ??? -- still not 100% on this scale logic
+  //
+	// 		this.maxX = maxX; this.maxY = maxY
+	// 		this.pos.scaleTo(maxX, maxY)
+	// 		this.vel.scaleTo(maxX, maxY)
+	// 	}
 
   MovingObject.prototype.move = function()
 
 		{
-			if (this._wraps) {
-        this.pos._hits_( vel, function(pos, dPos) {
-          return (pos + dPos) //% maxX || maxY
-        })
-			} else {
-				this.pos._plus_(this.vel)
-			}
+      this.pos._hits_( this.vel, function(pos, dPos) {
+        var addedDims = pos + dPos
+
+        if (addedDims < 0) return 100 - addedDims
+
+        return (pos + dPos) % 100
+      })
 	  }
 
   MovingObject.prototype.isCollidedWith = function (other)

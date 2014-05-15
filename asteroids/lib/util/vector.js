@@ -19,9 +19,18 @@
   Vector.random = function (minMag, maxMag)
 
     {
-      var randomMag = (maxMag - minMag) * Math.random() + minMag
+      var randomMag
+      var dummyVec
 
-      return new Vector(1, 1).ofMagnitude(randomMag)
+      randomMag = (maxMag - minMag) * Math.random() + minMag
+
+      dummyVec = new Vector(
+        Math.random() - Math.random(), Math.random() - Math.random()
+      )
+
+      dummyVec._magnitude_(randomMag)
+
+      return dummyVec
     }
 
 	Vector.inherits(_2D.Position)

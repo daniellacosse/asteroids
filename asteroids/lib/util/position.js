@@ -28,16 +28,16 @@
 
       switch(wall) {
       case 0:
-        return new Position(width * Math.random(), 0)
+        return new Position(100 * Math.random(), 0)
         break
       case 1:
-        return new Position(width * Math.random(), height)
+        return new Position(100 * Math.random(), 100)
         break
       case 2:
-        return new Position(0, height * Math.random())
+        return new Position(0, 100 * Math.random())
         break
       case 3:
-        return new Position(width, height * Math.random())
+        return new Position(100, 100 * Math.random())
         break
       }
     }
@@ -70,10 +70,9 @@
 	Position.prototype._hits_ = function (other, callback)
 
 		{
-			this.x = callback(this.x, other.x)
-			this.y = callback(this.y, other.y)
-			this.dimensions = [this.x, this.y]
-			if (this._scales) this._refresh_("scale")
+      this.x = callback(this.x, other.x)
+      this.y = callback(this.y, other.y)
+      this.dimensions = [this.x, this.y]
 
 			return null
 		}
@@ -123,44 +122,44 @@
 		)}
 
 	// still not 100% on "scale logic"
-	Position.prototype.scalesTo = function (maxX, maxY)
-
-		{
-			if (this.x > maxX || this.y > maxY) throw "Out of Bounds"
-
-			this._scales = true
-
-			this.maxX = maxX; this.maxY = maxY
-			this.pcntX = this.x / maxX
-			this.pcntY = this.y / maxY
-			this.pcntDim = [ this.pcntX, this.pcntY ]
-
-			return null
-		}
-
-	Position.prototype._refresh_ = function (prop)
-
-		{
-			if (prop === "scale" || prop === "s") {
-
-				this.pcntX = this.x / this.maxX
-				this.pcntY = this.y / this.maxY
-				this.pcntDim = [ this.pcntX, this.pcntY ]
-
-			} else if (prop === "dimensions" || prop === "d") {
-
-				this.x = this.pcntX * this.maxX
-				this.y = this.pcntY * this.maxY
-				this.dimensions = [ this.x, this.y ]
-
-			}	else if (prop === "all" || prop === "a") {
-
-				this._refresh_("scale")
-				this._refresh_("dimensions")
-			}
-
-			return null
-		}
+	// Position.prototype.scalesTo = function (maxX, maxY)
+  //
+	// 	{
+	// 		if (this.x > maxX || this.y > maxY) throw "Out of Bounds"
+  //
+	// 		this._scales = true
+  //
+	// 		this.maxX = maxX; this.maxY = maxY
+	// 		this.pcntX = this.x / maxX
+	// 		this.pcntY = this.y / maxY
+	// 		this.pcntDim = [ this.pcntX, this.pcntY ]
+  //
+	// 		return null
+	// 	}
+  //
+	// Position.prototype._refresh_ = function (prop)
+  //
+	// 	{
+	// 		if (prop === "scale" || prop === "s") {
+  //
+	// 			this.pcntX = this.x / this.maxX
+	// 			this.pcntY = this.y / this.maxY
+	// 			this.pcntDim = [ this.pcntX, this.pcntY ]
+  //
+	// 		} else if (prop === "dimensions" || prop === "d") {
+  //
+	// 			this.x = this.pcntX * this.maxX
+	// 			this.y = this.pcntY * this.maxY
+	// 			this.dimensions = [ this.x, this.y ]
+  //
+	// 		}	else if (prop === "all" || prop === "a") {
+  //
+	// 			this._refresh_("scale")
+	// 			this._refresh_("dimensions")
+	// 		}
+  //
+	// 		return null
+	// 	}
 
 
 })(this);

@@ -12,7 +12,7 @@
 	    this.asteroids = []
 	    this.bullets = []
 	    this.ship = new Asteroids.Ship({
-	    	pos: new _2D.Position(this.width/2, this.height/2),
+	    	pos: new _2D.Position(50, 50),
 				vel: _2D.Vector.immobile(),
 				game: this
 	    })
@@ -20,13 +20,11 @@
 
   Game.FPS = 60
 
-  // Game.prototype.addAsteroids = function (numOfAsteroids)
-  //
-	// 	{
-	//     for (var i = 0; i < numOfAsteroids; i++) {
-	//       this.asteroids.push(Asteroids.Asteroid.randomAsteroid());
-	//     }
-	//   }
+  Game.prototype.addAsteroid = function ()
+
+		{
+	    this.asteroids.push(Asteroids.Asteroid.randomAsteroid(this));
+	  }
 
   Game.prototype.draw = function()
 
@@ -61,19 +59,18 @@
   Game.prototype.step = function()
 
 		{
-	    // if (this.asteroids.length === 0){
-	    //   if( !alert('You Win!') ){ window.location.reload() }
-	    // }
-
 	    this.move()
 	    this.draw()
 	    this.checkCollisions()
+
+      if (this.asteroids.length < parseInt($("title").html())){
+        this.addAsteroid()
+      }
 	  }
 
-  Game.prototype.start = function(numberOfAsteroids)
+  Game.prototype.start = function()
 
 		{
-	    // this.addAsteroids(numberOfAsteroids)
 	    this.bindKeyHandlers()
 	    this.stepInterval = setInterval(this.step.bind(this), 1000 / this.FPS)
 	  }
@@ -81,11 +78,28 @@
   Game.prototype.checkCollisions = function (stepInterval)
 
 		{
-	    // for (var i = 0; i < this.asteroids.length; i++) {
-	    //   if (this.asteroids[i].isCollidedWith(this.ship)){
-	    //     if( !alert('Game Over!') ){ window.location.reload() }
-	    //   }
-	    // }
+	    for (var i = 0; i < this.asteroids.length; i++)
+
+      {
+        for (var j = i+1; j < this.asteroids.length; j++)
+
+          {
+            if (this.asteroids[i].isCollidedWith(this.asteroids[j]))
+
+              {
+                Asteroids.MovingObject.elasticCollision(
+                  this.asteroids[i], this.asteroids[j]
+                )
+              }
+
+            if (this.asteroids[i].isCollidedWith(this.ship))
+
+              {
+                alert("ship down")
+                // if( !alert('Game Over!') ){ window.location.reload() }
+              }
+          }
+      }
 	  }
 
   // Game.prototype.stop = function(stepInterval)
@@ -105,12 +119,23 @@
 		{
 	    var ship = this.ship
       var thrustDuration = 300
+      var thrustAmt = 0.2
 
-      key("a", function(){ ship.thrust(new _2D.Impulse(-1, 0, thrustDuration)) })
-      key("d", function(){ ship.thrust(new _2D.Impulse(1, 0, thrustDuration)) })
-	    key("w", function(){ ship.thrust(new _2D.Impulse(0, -1, thrustDuration)) })
-      key("s", function(){ ship.thrust(new _2D.Impulse(0, 1, thrustDuration)) })
-	    // key("space", function(){ that.fire() })
+      key("a", function(){
+        ship.thrust(new _2D.Impulse(-thrustAmt, 0, thrustDuration))
+      })
+
+      key("d", function(){
+        ship.thrust(new _2D.Impulse(thrustAmt, 0, thrustDuration))
+      })
+
+	    key("w", function(){
+        ship.thrust(new _2D.Impulse(0, -thrustAmt, thrustDuration))
+      })
+
+      key("s", function(){
+        ship.thrust(new _2D.Impulse(0, thrustAmt, thrustDuration))
+      })
 	  }
 
   // Game.prototype.removeAsteroid = function (index)
