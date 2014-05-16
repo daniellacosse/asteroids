@@ -72,7 +72,7 @@
   Game.prototype.start = function()
 
 		{
-      alert("tap wasd to thrust. click to fire")
+      alert("tap WASD to thrust. click to fire")
 	    this.bindKeyHandlers()
 	    this.stepInterval = setInterval(this.step.bind(this), 1000 / this.FPS)
 	  }
@@ -111,11 +111,11 @@
                 this.removeBullet(j)
               }
 
-            // if (this.ship.isCollidedWith(this.bullets[i]))
-            //
-            //   {
-            //     window.location.reload()
-            //   }
+            if (this.bullets[i].hitsShip && this.ship.isCollidedWith(this.bullets[i]))
+
+              {
+                window.location.reload()
+              }
           }
       }
 	  }

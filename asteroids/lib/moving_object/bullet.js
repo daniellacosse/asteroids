@@ -8,6 +8,9 @@
 			properties.color = Bullet.COLOR;
 
 	    Asteroids.MovingObject.call(this, properties);
+      this.hitsShip = false
+      var that = this;
+      setInterval(function(){that.hitsShip = true}, 500)
 	  }
 
   Bullet.inherits(Asteroids.MovingObject)
