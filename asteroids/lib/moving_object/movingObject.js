@@ -33,11 +33,11 @@
 	    ctx.fill();
 	  }
 
-  MovingObject.prototype.move = function()
+  MovingObject.prototype.move = function(times)
 
 		{
       this.pos._hits_( this.vel, function(pos, dPos) {
-        var addedDims = pos + dPos
+        var addedDims = pos + (dPos * times)
 
         if (addedDims < 0) return 100 - addedDims
 

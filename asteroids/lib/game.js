@@ -46,15 +46,23 @@
   Game.prototype.move = function()
 
 		{
+      if (!this.lastTickTime) {
+        this.lastTickTime = (new Date()).getTime();
+      }
+
+      var timeNow = (new Date()).getTime();
+      var numTicks = Game.FPS * ((timeNow - this.lastTickTime) / 1000);
+      this.lastTickTime = timeNow;
+
 	    for (var i = 0; i < this.asteroids.length; i++) {
-	      this.asteroids[i].move()
+	      this.asteroids[i].move(numTicks)
 	    }
 
 	    for (var i = 0; i < this.bullets.length; i++) {
-	      this.bullets[i].move()
+	      this.bullets[i].move(numTicks)
 	    }
 
-	    this.ship.move()
+	    this.ship.move(numTicks)
 	  }
 
   Game.prototype.step = function()
@@ -111,7 +119,7 @@
                 this.removeBullet(j)
               }
 
-            if (this.bullets[i].hitsShip && this.ship.isCollidedWith(this.bullets[i]))
+            if (this.bullets[j].hitsShip && this.ship.isCollidedWith(this.bullets[j]))
 
               {
                 window.location.reload()
@@ -136,7 +144,7 @@
 
 		{
 	    var ship = this.ship
-      var thrustDuration = 500
+      var thrustDuration = 300
       var thrustAmt = 0.45
 
       key("a", function(){
