@@ -63,9 +63,9 @@
 	    this.draw()
 	    this.checkCollisions()
 
-      // if (this.asteroids.length < parseInt($("title").html())){
-      //   this.addAsteroid()
-      // }
+      if (this.asteroids.length < parseInt($("title").html())){
+        this.addAsteroid()
+      }
 	  }
 
   Game.prototype.start = function()
@@ -73,9 +73,6 @@
 		{
 	    this.bindKeyHandlers()
 	    this.stepInterval = setInterval(this.step.bind(this), 1000 / this.FPS)
-
-      this.addAsteroid()
-      this.addAsteroid()
 	  }
 
   Game.prototype.checkCollisions = function (stepInterval)
@@ -84,14 +81,12 @@
 	    for (var i = 0; i < this.asteroids.length; i++)
 
       {
-        for (var j = i+1; j < this.asteroids.length; j++)
+        for (var j = i + 1; j < this.asteroids.length; j++)
 
           {
             if (this.asteroids[i].isCollidedWith(this.asteroids[j]))
 
               {
-                console.log(this.asteroids[i].pos, "collided with", this.asteroids[j].pos)
-
                 Asteroids.MovingObject.elasticCollision(
                   this.asteroids[i], this.asteroids[j]
                 )
@@ -100,17 +95,34 @@
             if (this.asteroids[i].isCollidedWith(this.ship))
 
               {
-                // if( !alert('Game Over!') ){ window.location.reload() }
+                if( !alert('Game Over!') ){ window.location.reload() }
               }
+          }
+
+        for (var j = 0; j < this.bullets.length; j++)
+
+          {
+            if (this.asteroids[i].isCollidedWith(this.bullets[j]))
+
+              {
+                this.removeAsteroid(i)
+                this.removeBullet(j)
+              }
+
+            // if (this.ship.isCollidedWith(this.bullets[i]))
+            //
+            //   {
+            //     if( !alert('Game Over!') ){ window.location.reload() }
+            //   }
           }
       }
 	  }
 
-  // Game.prototype.stop = function(stepInterval)
-  //
-	// 	{
-	//     clearInterval(this.stepInterval)
-	//   }
+  Game.prototype.stop = function(stepInterval)
+
+		{
+	    clearInterval(this.stepInterval)
+	  }
 
   Game.prototype.fireBullet = function(mousePos)
 
@@ -123,7 +135,7 @@
 		{
 	    var ship = this.ship
       var thrustDuration = 300
-      var thrustAmt = 0.2
+      var thrustAmt = 0.5
 
       key("a", function(){
         ship.thrust(new _2D.Impulse(-thrustAmt, 0, thrustDuration))
@@ -142,18 +154,16 @@
       })
 	  }
 
-  // Game.prototype.removeAsteroid = function (index)
-  //
-	// 	{
-	//     this.asteroids.splice(index, 1)
-	//   }
-  //
-  // Game.prototype.removeBullet = function (bullet)
-  //
-	//   {
-	//     var bulIndex = this.bullets.indexOf(bullet)
-  //
-	//     if (bulIndex > -1) this.bullets.splice(bulIndex, 1)
-	//   }
+  Game.prototype.removeAsteroid = function (idx)
+
+		{
+	    this.asteroids.splice(idx, 1)
+	  }
+
+  Game.prototype.removeBullet = function (idx)
+
+	  {
+	    this.bullets.splice(idx, 1)
+	  }
 
 })(this);

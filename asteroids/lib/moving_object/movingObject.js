@@ -33,16 +33,6 @@
 	    ctx.fill();
 	  }
 
-	// MovingObject.prototype.wrapOn = function (maxX, maxY)
-  //
-	// 	{
-	// 		this._wraps = true // ??? -- still not 100% on this scale logic
-  //
-	// 		this.maxX = maxX; this.maxY = maxY
-	// 		this.pos.scaleTo(maxX, maxY)
-	// 		this.vel.scaleTo(maxX, maxY)
-	// 	}
-
   MovingObject.prototype.move = function()
 
 		{
