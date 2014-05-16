@@ -63,9 +63,9 @@
 	    this.draw()
 	    this.checkCollisions()
 
-      if (this.asteroids.length < parseInt($("title").html())){
-        this.addAsteroid()
-      }
+      // if (this.asteroids.length < parseInt($("title").html())){
+      //   this.addAsteroid()
+      // }
 	  }
 
   Game.prototype.start = function()
@@ -73,6 +73,9 @@
 		{
 	    this.bindKeyHandlers()
 	    this.stepInterval = setInterval(this.step.bind(this), 1000 / this.FPS)
+
+      this.addAsteroid()
+      this.addAsteroid()
 	  }
 
   Game.prototype.checkCollisions = function (stepInterval)
@@ -87,6 +90,8 @@
             if (this.asteroids[i].isCollidedWith(this.asteroids[j]))
 
               {
+                console.log(this.asteroids[i].pos, "collided with", this.asteroids[j].pos)
+
                 Asteroids.MovingObject.elasticCollision(
                   this.asteroids[i], this.asteroids[j]
                 )
@@ -95,7 +100,6 @@
             if (this.asteroids[i].isCollidedWith(this.ship))
 
               {
-                alert("ship down")
                 // if( !alert('Game Over!') ){ window.location.reload() }
               }
           }

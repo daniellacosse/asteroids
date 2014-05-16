@@ -118,7 +118,7 @@
 			// we avoid creating vector objects to
 			// merely check collisions
 			return Math.sqrt(
-				Math.pow(this.x, 2) + Math.pow(this.y, 2)
+				Math.pow(otherPos.x - this.x, 2) + Math.pow(otherPos.y - this.y, 2)
 		)}
 
 	// still not 100% on "scale logic"
