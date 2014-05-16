@@ -41,7 +41,8 @@
 
         if (addedDims < 0) return 100 - addedDims
 
-        return (pos + dPos) % 100
+        ///\\\///\\\ additional 3% is a sort of 'padding' ///\\\///\\\
+        return (pos + dPos) % 103
       })
 	  }
 

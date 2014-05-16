@@ -10,9 +10,9 @@
   Asteroid.inherits(Asteroids.MovingObject)
 
   Asteroid.MIN_SPEED = 0.2
-  Asteroid.MAX_SPEED = 0.5
-  Asteroid.MIN_RADIUS = 0.1
-  Asteroid.MAX_RADIUS = 2
+  Asteroid.MAX_SPEED = 0.35
+  Asteroid.MIN_RADIUS = 0.7
+  Asteroid.MAX_RADIUS = 1.8
 
   Asteroid.randomAsteroid = function(game)
 

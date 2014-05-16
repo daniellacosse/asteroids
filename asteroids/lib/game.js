@@ -8,6 +8,7 @@
       this.width = properties.width
       this.height = properties.height
       this.fps = Game.FPS
+      this.score = 0
 
 	    this.asteroids = []
 	    this.bullets = []
@@ -59,18 +60,19 @@
   Game.prototype.step = function()
 
 		{
+      var presentScore = parseInt($("title").html())
+      if (presentScore > this.score) this.addAsteroid()
+      this.score = presentScore
+
 	    this.move()
 	    this.draw()
 	    this.checkCollisions()
-
-      if (this.asteroids.length < parseInt($("title").html())){
-        this.addAsteroid()
-      }
 	  }
 
   Game.prototype.start = function()
 
 		{
+      alert("tap wasd to thrust. click to fire")
 	    this.bindKeyHandlers()
 	    this.stepInterval = setInterval(this.step.bind(this), 1000 / this.FPS)
 	  }
@@ -95,7 +97,7 @@
             if (this.asteroids[i].isCollidedWith(this.ship))
 
               {
-                if( !alert('Game Over!') ){ window.location.reload() }
+                window.location.reload()
               }
           }
 
@@ -112,7 +114,7 @@
             // if (this.ship.isCollidedWith(this.bullets[i]))
             //
             //   {
-            //     if( !alert('Game Over!') ){ window.location.reload() }
+            //     window.location.reload()
             //   }
           }
       }
@@ -134,8 +136,8 @@
 
 		{
 	    var ship = this.ship
-      var thrustDuration = 300
-      var thrustAmt = 0.5
+      var thrustDuration = 500
+      var thrustAmt = 0.45
 
       key("a", function(){
         ship.thrust(new _2D.Impulse(-thrustAmt, 0, thrustDuration))
